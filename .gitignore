@@ -1,0 +1,12 @@
+*.bak
+input/
+NET/Solution/ElicitationSimulationRunner/bin/
+NET/Solution/ElicitationSimulationRunner/debug/
+Python/output
+Python/__pycache__
+net/Solution/.vs/
+net/.vs/
+.vscode/
+bin/
+obj/
+*.png
