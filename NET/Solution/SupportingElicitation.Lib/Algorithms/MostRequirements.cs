@@ -5,12 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SupportingElicitation.Lib
+namespace SupportingElicitation.Lib.Algorithms
 {
     public class MostRequirements : IAlgorithm
     {
         List<string> rankingOfTemplates;
         int indexOfLastSuggestedTemplate = -1;
+
+        public string Name => "MostRequirements";
 
         public string GetNextTemplateIDToSuggest()
         {

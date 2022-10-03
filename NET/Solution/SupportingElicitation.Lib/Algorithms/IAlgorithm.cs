@@ -5,11 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Data.Analysis;
 
-namespace SupportingElicitation.Lib
+namespace SupportingElicitation.Lib.Algorithms
 {
     public interface IAlgorithm
     {
         public void SetUp(DataGrid inputData);
+        public string Name { get;  }
 
         public string GetNextTemplateIDToSuggest();
 

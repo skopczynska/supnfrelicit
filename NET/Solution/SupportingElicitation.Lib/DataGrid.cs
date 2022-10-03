@@ -15,6 +15,7 @@ namespace SupportingElicitation.Lib
         {
             data = new Dictionary<string,Dictionary<int, double>>();
         }
+
         public DataGrid(Dictionary<string, Dictionary<int, double>> inputData)
         {
             data = inputData;   
@@ -49,8 +50,14 @@ namespace SupportingElicitation.Lib
 
         public void AddNewValue(string row, int column, double value)
         {
+            if (!data.ContainsKey(row))
+            {
+                data.Add(row, new Dictionary<int, double>());
+            }
             data[row].Add(column, value);
         }
+
+       
 
         public Dictionary<int, double> GetFrequencyOfColumns()
         {
@@ -88,6 +95,17 @@ namespace SupportingElicitation.Lib
             }
 
             return list;
+        }
+
+        public Dictionary<string, double> GetFirstColumnAndColumnValues(int column)
+        {
+            Dictionary<string, double> columnValues = new();
+            foreach (var row in data)
+            {
+                columnValues.Add(row.Key, row.Value[column]);
+            }
+
+            return columnValues;
         }
 
         public List<string> GetRowNames()
@@ -136,6 +154,21 @@ namespace SupportingElicitation.Lib
             
             DataGrid newDG = new DataGrid(newData);
             return newDG;
+        }
+
+       
+
+        internal void Join(DataGrid dataGridToBeAdded)
+        {
+            foreach(var row in dataGridToBeAdded)
+            {
+                
+                foreach (var columnValuePair in row.Value)
+                {
+                    int nextColumnID = data.ContainsKey(row.Key) ? data[row.Key].Keys.Max() + 1 : 1;
+                    this.AddNewValue(row.Key, nextColumnID, columnValuePair.Value);
+                }
+            }
         }
     }
 

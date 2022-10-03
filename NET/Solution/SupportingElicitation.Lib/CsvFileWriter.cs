@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace SupportingElicitation.Lib
 {
-    public static class CsvFileWriter
+    public class CsvFileWriter
     {
-        public static void SaveToCsv(DataGrid dataToSave, string filePath)
+        public static void SaveToCsv(DataGrid dataGridToSave, string filePath)
         {
             using(StreamWriter sw = new StreamWriter(filePath))
             {
-                double numOfColumns = dataToSave.GetNumOfColumns();
+                double numOfColumns = dataGridToSave.GetNumOfColumns();
                 string line = "ID";
                 for (int i=1; i<=numOfColumns; i++)
                 {
                     line = string.Format("{0};{1}", line, i);
                 }
                 sw.WriteLine(line);
-                foreach (var row in dataToSave)
+                foreach (var row in dataGridToSave)
                 {
                     line = string.Format("{0}", row.Key);
                     foreach (var column in row.Value.Values)

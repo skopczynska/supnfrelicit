@@ -5,12 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SupportingElicitation.Lib
+namespace SupportingElicitation.Lib.Algorithms
 {
     public class MostTemplates : IAlgorithm
     {
         List<string> rankingOfTemplates;
         int indexOfLastSuggestedTemplate = -1;
+
+        public string Name =>  "MostTemplates";
 
         public string GetNextTemplateIDToSuggest()
         {
@@ -24,6 +26,16 @@ namespace SupportingElicitation.Lib
 
         public void SetUp(DataGrid inputData)
         {
+            if (rankingOfTemplates == null)
+            {
+                CreateRankingOfTemplates(inputData);
+            }
+            indexOfLastSuggestedTemplate = -1;
+
+        }
+
+        private void CreateRankingOfTemplates(DataGrid inputData)
+        {
             Dictionary<string, double> freqOfTemplates = new Dictionary<string, double>();
 
             foreach (var item in inputData)
@@ -32,7 +44,7 @@ namespace SupportingElicitation.Lib
                 freqOfTemplates.Add(item.Key, frequency);
             }
 
-            freqOfTemplates = freqOfTemplates.OrderByDescending(a => a.Value).ToDictionary(x=> x.Key, x=>x.Value);
+            freqOfTemplates = freqOfTemplates.OrderByDescending(a => a.Value).ToDictionary(x => x.Key, x => x.Value);
             rankingOfTemplates = freqOfTemplates.Keys.ToList();
         }
 

@@ -2,43 +2,36 @@
 
 namespace SupportingElicitation.Lib
 {
-    public static class InputDataProvider
+    public class InputDataProvider
     {
         
-        public static DataFrame FrequencyMatrix
+       public static DataGrid FrequencyMatrix { get; private set; }
+
+
+        public static DataGrid ReadDataFromFile(string filePath)
         {
-            get;
-
-            private set;
-        }
-
-        public static DataGrid FrequencyMatrixDic { get; private set; }
-
-
-        public static bool ReadDataFromFile(string filePath)
-        {
-            FrequencyMatrix = DataFrame.LoadCsv(filePath, header: true, separator:';', guessRows:600);
-
-            Dictionary<string, Dictionary<int, double>> frequencyMatrixDicTemp = new Dictionary<string, Dictionary<int, double>>();
-            Dictionary<int, double> templatesPerProject = null;
+            FrequencyMatrix = new DataGrid();
+            
             using (var reader = new StreamReader(filePath))
             {
-                reader.ReadLine();
+                reader.ReadLine(); // Omit header in the file
+                int rowNumber = 0;
                 while (!reader.EndOfStream)
                 {
                     var line = reader.ReadLine();
                     var values = line.Split(';');
-                    templatesPerProject = new Dictionary<int, double>();
-                    for (int i=1; i < values.Length; i++)
+                    
+                    for (int i= 1; i < values.Length; i++) //Starts from 1 to omit the first column in the file
                     {
-                        templatesPerProject.Add(i, int.Parse(values[i]));
+                        FrequencyMatrix.AddNewValue(rowNumber.ToString(), i-1, double.Parse(values[i]));
                     }
-                    frequencyMatrixDicTemp.Add(values[0], templatesPerProject);
+
+                    rowNumber++;
+                    
                 }
-                FrequencyMatrixDic = new DataGrid(frequencyMatrixDicTemp);
             }
 
-            return true;
+            return FrequencyMatrix;
         }
 
         
