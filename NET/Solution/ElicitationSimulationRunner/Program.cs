@@ -5,7 +5,7 @@ using SupportingElicitation.Lib.Algorithms;
 
 DataGrid inputDataFM = InputDataProvider.ReadDataFromFile(@"D:\SVNs\supnfrelicit\input\FreqMatrix.csv");
 
-IAlgorithm algorithm = new MostTemplates();
+IAlgorithm algorithm = new SupportingElicitation.Lib.Algorithms.Random();
 Simulator simulator = new Simulator(inputDataFM, algorithm);
 
 int simulationNum = 1;
@@ -17,7 +17,7 @@ CsvFileWriter.SaveToCsv(result.CompletnessOfTemplates, string.Format("completnes
 CsvFileWriter.SaveToCsv(result.PrecisionOfTemplates, string.Format("precisionTempl-{0}", resultFileEnding));
 
 
-
+Console.WriteLine("Finito! :-)");
 Console.ReadLine();
 
 
