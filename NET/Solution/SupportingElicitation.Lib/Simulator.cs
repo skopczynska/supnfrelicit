@@ -19,9 +19,9 @@ namespace SupportingElicitation.Lib
         }
 
 
-        public EliciationStatistics RunSimulations(int numberOfSimulations)
+        public EliciationStatistics RunSimulations(int numberOfSimulations, int bucketPercSize, int maxNumOfTemplatesPercToConsider)
         {
-            EliciationStatistics allEliciationSessionsResults = new EliciationStatistics();
+            EliciationStatistics allEliciationSessionsResults = new EliciationStatistics(bucketPercSize, maxNumOfTemplatesPercToConsider);
             for (int i = 0; i < numberOfSimulations; i++)
             {
                 EliciationStatistics currentEliciationSessionResult = RunSimulationForCatalog();
@@ -67,6 +67,7 @@ namespace SupportingElicitation.Lib
                 eliciationStatistics.Update(projectID, statMeasuresCollector);
                 template = algorithm.GetNextTemplateIDToSuggest();
             }
+            eliciationStatistics.CalculateFinalStatistics(projectID, statMeasuresCollector);
         }
     }
 }

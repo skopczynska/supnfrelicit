@@ -12,7 +12,7 @@ digPrec<-4
 
 fileName <-"complentess"
 dataMT <-read.csv("..\\output\\completnessReqs-310-2345-1-MostTemplates.csv", sep=";", header=TRUE, encoding = "UTF-8", dec=",")
-dataRandom <-read.csv("..\\output\\completnessReqs-510-110-1-Random.csv", sep=";", header=TRUE, encoding = "UTF-8", dec=",")
+dataRandom <-read.csv("..\\output\\completnessReqsPerBucket-1110-1859-1-Random.csv", sep=";", header=TRUE, encoding = "UTF-8", dec=",")
 
 
 
@@ -45,7 +45,7 @@ plots <- list(createPlot(dataMT, "NumberOfTemplates","Completeness","Most Templa
           createPlot(dataRandom, "NumberOfTemplates","Completeness","Random"))
 
 
-pdf(paste(fileName, ".pdf", sep=''), width = 30, height=20)
+pdf(paste("..\\output\\", fileName, ".pdf", sep=''), width = 30, height=20)
 multiplot(plotlist = plots, cols=2)
 dev.off()
 
