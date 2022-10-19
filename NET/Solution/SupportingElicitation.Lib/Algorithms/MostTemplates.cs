@@ -14,6 +14,13 @@ namespace SupportingElicitation.Lib.Algorithms
 
         public string Name =>  "MostTemplates";
 
+
+        public int GetRankOfTemplate(string template)
+        {
+            return rankingOfTemplates.IndexOf(template);
+        }
+
+
         public string GetNextTemplateIDToSuggest()
         {
             indexOfLastSuggestedTemplate++;

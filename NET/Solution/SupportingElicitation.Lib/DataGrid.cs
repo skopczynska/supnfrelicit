@@ -13,19 +13,19 @@ namespace SupportingElicitation.Lib
 
         public DataGrid()
         {
-            data = new Dictionary<string,Dictionary<int, double>>();
+            data = new Dictionary<string, Dictionary<int, double>>();
         }
 
         public DataGrid(Dictionary<string, Dictionary<int, double>> inputData)
         {
-            data = inputData;   
+            data = inputData;
         }
 
         public Dictionary<int, double> GetSumOfColumns()
         {
             Dictionary<int, double> sumOfColumns = new Dictionary<int, double>();
             int numOfColumns = GetNumOfColumns();
-            for(int i=1; i<= numOfColumns; i++)
+            for (int i = 1; i <= numOfColumns; i++)
             {
                 sumOfColumns.Add(i, 0);
             }
@@ -57,7 +57,7 @@ namespace SupportingElicitation.Lib
             data[row].Add(column, value);
         }
 
-       
+
 
         public Dictionary<int, double> GetFrequencyOfColumns()
         {
@@ -95,6 +95,11 @@ namespace SupportingElicitation.Lib
             }
 
             return list;
+        }
+
+        public Dictionary<int, double> GetRowValues(string row)
+        {
+            return data[row];
         }
 
         public Dictionary<string, double> GetFirstColumnAndColumnValues(int column)
