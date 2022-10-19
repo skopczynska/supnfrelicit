@@ -74,7 +74,7 @@ namespace SupportingElicitation.Lib
 
                 if (valuesOfCompletnessReqsPerBucket.Count() == 0)
                 {
-                    if (bucket.Key == BucketPercSize) // First item add 0
+                    if (bucket.Key == bucketPercSize) // First item add 0
                     {
                         CompletnessOfReqsPerBucket.AddNewValue(bucket.Key.ToString(), projectID, 0);
                         CompletnessOfTemplatesPerBucket.AddNewValue(bucket.Key.ToString(), projectID, 0);
@@ -83,11 +83,11 @@ namespace SupportingElicitation.Lib
                     else // other items add the previous value
                     {
                         CompletnessOfReqsPerBucket.AddNewValue(bucket.Key.ToString(), projectID,
-                            CompletnessOfReqsPerBucket.GetValue((bucket.Key - BucketPercSize).ToString(), projectID));
+                            CompletnessOfReqsPerBucket.GetValue((bucket.Key - bucketPercSize).ToString(), projectID));
                         CompletnessOfTemplatesPerBucket.AddNewValue(bucket.Key.ToString(), projectID,
-                            CompletnessOfTemplatesPerBucket.GetValue((bucket.Key - BucketPercSize).ToString(), projectID));
+                            CompletnessOfTemplatesPerBucket.GetValue((bucket.Key - bucketPercSize).ToString(), projectID));
                         PrecisionOfTemplatesPerBucket.AddNewValue(bucket.Key.ToString(), projectID,
-                            PrecisionOfTemplatesPerBucket.GetValue((bucket.Key - BucketPercSize).ToString(), projectID));
+                            PrecisionOfTemplatesPerBucket.GetValue((bucket.Key - bucketPercSize).ToString(), projectID));
 
 
                     }

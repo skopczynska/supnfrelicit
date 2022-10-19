@@ -24,16 +24,16 @@ namespace SupportingElicitation.Lib
             EliciationStatistics allEliciationSessionsResults = new EliciationStatistics(bucketPercSize, maxNumOfTemplatesPercToConsider);
             for (int i = 0; i < numberOfSimulations; i++)
             {
-                EliciationStatistics currentEliciationSessionResult = RunSimulationForCatalog();
+                EliciationStatistics currentEliciationSessionResult = RunSimulationForCatalog(bucketPercSize, maxNumOfTemplatesPercToConsider);
                 allEliciationSessionsResults.Join(currentEliciationSessionResult);
             }
 
             return allEliciationSessionsResults;
         }
 
-        private EliciationStatistics RunSimulationForCatalog()
+        private EliciationStatistics RunSimulationForCatalog(int bucketPercSize, int maxNumOfTemplatesPercToConsider)
         {
-            EliciationStatistics eliciationStatisticsForOneSimulation = new EliciationStatistics();
+            EliciationStatistics eliciationStatisticsForOneSimulation = new EliciationStatistics(bucketPercSize, maxNumOfTemplatesPercToConsider);
             for (int i = 0; i < data.GetNumOfColumns(); i++) //for each project (projects are columns)
             {
                 DataGrid dataExceptOneProject = data.Copy();
