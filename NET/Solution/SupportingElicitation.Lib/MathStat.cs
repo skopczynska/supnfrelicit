@@ -35,7 +35,7 @@ namespace SupportingElicitation.Lib.Math
 			return median;
 		}
 		//private const int MaxPerctangeOfProposedTemplates = 500; //How many more templates (in perc) the algorithm shall consider
-		public static Dictionary<int, List<int>> GetBuckets(int numberOfTemplates, int bucketSizePerc, int maxPerctangeOfProposedTemplates)
+		public static Dictionary<int, List<int>> GetBuckets(int numberOfTemplates, int numberOfProposedTemplates, int bucketSizePerc, int maxPerctangeOfProposedTemplates)
 		{
 			Dictionary<int, List<int>> buckets = new Dictionary<int, List<int>>();
 			int numOfBuckets = maxPerctangeOfProposedTemplates / bucketSizePerc;
@@ -45,10 +45,12 @@ namespace SupportingElicitation.Lib.Math
 				buckets.Add((i+1)* bucketSizePerc , new List<int>());
 			}
 
-			for (int i = 1; i <= numberOfTemplates * maxPerctangeOfProposedTemplates / 100; i++)
+			for (int i = 1; i <= numberOfProposedTemplates; i++)
 			{
 				int templatePerc = (int) (((double) i / numberOfTemplates) * 100); //100 because it is percentage
 				int templateBucketPerc = GetBucketPerc(templatePerc, bucketSizePerc, numOfBuckets, maxPerctangeOfProposedTemplates);
+				if (templateBucketPerc > maxPerctangeOfProposedTemplates)
+					break;
 				buckets[templateBucketPerc].Add(i);
 			}
 			

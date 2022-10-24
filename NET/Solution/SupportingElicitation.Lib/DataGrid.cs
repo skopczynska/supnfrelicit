@@ -46,15 +46,32 @@ namespace SupportingElicitation.Lib
             {
                 data.Add(j, new Dictionary<int, double>());
             }
+            var otherRows = data.Keys.Where(k => k != j);
+            if (otherRows.Any())
+            {
+                Dictionary<int, double> OldRow = data[otherRows.FirstOrDefault()];
+
+                foreach (var column in OldRow)
+                {
+                    data[j].Add(column.Key, 0);
+                }
+            }
         }
 
         public void AddNewValue(string row, int column, double value)
         {
             if (!data.ContainsKey(row))
             {
-                data.Add(row, new Dictionary<int, double>());
+               AddRow(row);
             }
-            data[row].Add(column, value);
+            foreach (var rowEl in data)
+            {
+                if (!rowEl.Value.ContainsKey(column))
+                {
+                    rowEl.Value.Add(column, 0);
+                }
+            }
+            data[row][column] = value;
         }
 
 
@@ -173,6 +190,16 @@ namespace SupportingElicitation.Lib
                     int nextColumnID = data.ContainsKey(row.Key) ? data[row.Key].Keys.Max() + 1 : 1;
                     this.AddNewValue(row.Key, nextColumnID, columnValuePair.Value);
                 }
+            }
+        }
+
+        internal void RemoveRowsWithOnlyZeroValues()
+        {
+            var rowsOfSumZero = data.Where(s => s.Value.Sum(e => e.Value) == 0);
+
+            foreach (var elementToRemove in rowsOfSumZero)
+            {
+                data.Remove(elementToRemove.Key);
             }
         }
     }
