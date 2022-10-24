@@ -42,5 +42,10 @@ namespace SupportingElicitation.Lib
         {
             NumberOfProposedTemplates++;
         }
+
+        internal bool AreAllTemplatesSuggested()
+        {
+            return TotalNumberOfTemplates == NumberOfGoodTemplates;
+        }
     }
 }

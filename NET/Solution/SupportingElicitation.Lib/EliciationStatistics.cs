@@ -55,7 +55,7 @@ namespace SupportingElicitation.Lib
             //int bucketSize = (((int)statMeasuresCollector.TotalNumberOfTemplates) * BucketPercSize) / 100; // Number of templates per bucket
             //bucketSize = bucketSize == 0 ? 1 : bucketSize;
             //int numberOfBuckets = ((int) statMeasuresCollector.TotalNumberOfTemplates) / bucketSize;
-            Dictionary<int, List<int>> buckets = MathStat.GetBuckets((int)statMeasuresCollector.TotalNumberOfTemplates, bucketPercSize, maxNumOfTemplatesPercPerBucket);
+            Dictionary<int, List<int>> buckets = MathStat.GetBuckets((int)statMeasuresCollector.TotalNumberOfTemplates, (int)statMeasuresCollector.NumberOfProposedTemplates, bucketPercSize, maxNumOfTemplatesPercPerBucket);
             ///Console.WriteLine(String.Format("P: {0}, bucket Size: {1} numOfBuckets: {2}, temp: {3}", projectID, bucketSize, numberOfBuckets, statMeasuresCollector.TotalNumberOfTemplates));
 
             foreach (var bucket in buckets)
